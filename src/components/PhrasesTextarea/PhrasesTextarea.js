@@ -1,7 +1,5 @@
 import * as React from 'react';
-import {TextInput, StyleSheet} from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
-
+import {SafeAreaView, TextInput, StyleSheet} from 'react-native';
 
 export default function PhrasesTextarea({ phrase, editable, onChange = () => null }) {
   return (
