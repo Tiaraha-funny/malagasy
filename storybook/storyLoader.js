@@ -4,13 +4,13 @@
 // https://github.com/elderfo/react-native-storybook-loader.git
 
 function loadStories() {
-  require('../src/components/Example/Example.stories');
+  require('../src/components/Example/Examples.stories');
   require('./stories/Button/Button.stories');
   require('./stories/Welcome/Welcome.stories');
 }
 
 const stories = [
-  '../src/components/Example/Example.stories',
+  '../src/components/Example/Examples.stories',
   './stories/Button/Button.stories',
   './stories/Welcome/Welcome.stories',
 ];
