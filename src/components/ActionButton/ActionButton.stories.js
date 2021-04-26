@@ -4,6 +4,9 @@ import {View} from 'react-native';
 import {storiesOf} from '@storybook/react-native';
 
 import ActionButton from './ActionButton';
+import PickSvg from "./icons/pick.svg";
+import WrongSvg from "./icons/wrong.svg";
+import RightSvg from "./icons/right.svg";
 
 storiesOf('Action Button', module)
   .addDecorator(story => <View>{story()}</View>)
@@ -12,22 +15,22 @@ storiesOf('Action Button', module)
           <View>
             <ActionButton
                 content="Learn"
-                icon={pickIcon}
+                icon={<PickSvg/>}
                 onPress={() => Click('Learn')}
             />
             <ActionButton
                 content="Wrong"
-                icon={wrongIcon}
+                icon={<WrongSvg/>}
                 onPress={() => Click('Wrong')}
             />
             <ActionButton
                 content="Right"
-                icon={rightIcon}
+                icon={<RightSvg/>}
                 onPress={() => Click('Right')}
             />
             <ActionButton
                 content="Pick"
-                icon={pickIcon}
+                icon={<PickSvg/>}
                 onPress={() => Click('Pick')}
             />
           </View>
@@ -39,6 +42,7 @@ storiesOf('Action Button', module)
   console.log('You clicked', content);
 }
 
-const wrongIcon = require('./icons/wrong.png');
-const rightIcon = require('./icons/right.png');
-const pickIcon = require('./icons/pick.png');
+const wrongIcon = require('./icons/wrong.svg');
+const rightIcon = require('./icons/right.svg');
+const pickIcon = require('./icons/pick.svg');
+

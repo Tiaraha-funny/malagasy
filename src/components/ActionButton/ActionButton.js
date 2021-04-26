@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {StyleSheet, Image, TouchableHighlight, View, Text} from 'react-native';
+import {StyleSheet, TouchableHighlight, View, Text} from 'react-native';
 
 export default function ActionButton({content, icon, onPress}) {
   let textColor = '#06B6D4';
@@ -13,7 +13,6 @@ export default function ActionButton({content, icon, onPress}) {
     <View style={styles.container}>
       <TouchableHighlight
         onPress={onPress}
-        // activeOpacity={0.3}
         style={styles.touchButton}
         >
         <View style={styles.wrapper}>
@@ -27,7 +26,7 @@ export default function ActionButton({content, icon, onPress}) {
             }}>
             {content}
           </Text>
-          <Image source={icon} resizeMode="contain" />
+          {icon}
         </View>
       </TouchableHighlight>
     </View>
@@ -42,18 +41,22 @@ const styles = StyleSheet.create({
     },
 
     touchButton: {
-        backgroundColor: '#FFFFFF',
-        borderColor: '#E5E5E5',
-        borderWidth: 1,
-        borderRadius: 3,
+        // backgroundColor: '#FFFFFF',
+        // borderColor: '#E5E5E5',
+        // borderWidth: 1,
+        // borderRadius: 3,
         height: 57,
     },
 
     wrapper: {
         flex: 1,
         flexDirection: 'row',
-        justifyContent: 'flex-end',
+        justifyContent: 'center',
         alignItems: 'center',
         padding: 10,
+    },
+
+    images: {
+      maxWidth: "100%",
     }
 })
