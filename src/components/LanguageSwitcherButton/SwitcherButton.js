@@ -2,12 +2,12 @@ import * as React from 'react';
 import {StyleSheet, Text, View, TouchableOpacity} from 'react-native';
 
 export default function LanguageSwitcherButton({icon, onPress, switcherLang}) {
-  let primary = 'ma';
-  let secondary = 'en';
+  let primary = 'en';
+  let secondary = 'ma';
 
   if (switcherLang) {
-    primary = 'en';
-    secondary = 'ma';
+    primary = 'ma';
+    secondary = 'en';
   }
 
   return (
