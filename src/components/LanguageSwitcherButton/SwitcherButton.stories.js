@@ -6,13 +6,19 @@ import LanguageSwitcherButton from './SwitcherButton';
 
 storiesOf('Language Switcher Button', module)
   .addDecorator(story => <View>{story()}</View>)
-  .add('switch', () => (
-    <LanguageSwitcherButton
-      icon={<SwitcherSvg />}
-      onPress={() => HandleSwitcherClick()}
-    />
-  ));
+  .add('switch', () => <HandleSwitcherClick />);
 
 function HandleSwitcherClick() {
-  console.log('You switched language');
+  const [switcherLang, setSwitcherLang] = React.useState(false);
+  const toggleCallBack = React.useCallback(() =>
+    setSwitcherLang(!switcherLang),
+  );
+
+  return (
+    <LanguageSwitcherButton
+      icon={<SwitcherSvg />}
+      onPress={toggleCallBack}
+      switcherLang={switcherLang}
+    />
+  );
 }
