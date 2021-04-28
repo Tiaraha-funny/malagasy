@@ -12,13 +12,10 @@ storiesOf('List item', module).add('Item', () => (
   </>
 ));
 
-function Items({categoryText, category}) {
+function Items({categoryText, category, content, icon, onPress}) {
   return (
     <ListItems category={category} text={categoryText}>
-      <ActionButton
-        icon={<LearnSvg />}
-        onPress={() => alert('You clicked to learn button')}
-      />
+      <ActionButton content={content} icon={<LearnSvg />} onPress={onPress} />
     </ListItems>
   );
 }
