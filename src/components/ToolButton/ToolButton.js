@@ -1,15 +1,20 @@
 import React from 'react';
-import {StyleSheet, TouchableHighlight, View} from 'react-native';
+import {
+  StyleSheet,
+  TouchableHighlight,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 
 export default function ToolButton({onPress, icon}) {
   return (
     <View style={styles.container}>
-      <TouchableHighlight
+      <TouchableOpacity
         style={styles.content}
         onPress={onPress}
         activeOpacity={0.6}>
         {icon}
-      </TouchableHighlight>
+      </TouchableOpacity>
     </View>
   );
 }

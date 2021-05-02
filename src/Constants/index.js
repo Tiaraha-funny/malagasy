@@ -1,1 +1,2 @@
-export const HOME_SCREEN_CATEGORY_LIST = 'CATEGORY_LIST';
+export const CATEGORY_LIST = 'CATEGORY_LIST';
+export const GET_PHRASES = 'GET_PHRASES';

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {StyleSheet, TouchableHighlight, View, Text} from 'react-native';
+import {StyleSheet, View, Text, TouchableOpacity} from 'react-native';
 
 export default function ActionButton({content, icon, onPress}) {
   let textColor = '#06B6D4';
@@ -11,10 +11,7 @@ export default function ActionButton({content, icon, onPress}) {
 
   return (
     <View style={styles.container}>
-      <TouchableHighlight
-        onPress={onPress}
-        style={styles.touchButton}
-        >
+      <TouchableOpacity onPress={onPress} style={styles.touchButton}>
         <View style={styles.wrapper}>
           <Text
             style={{
@@ -28,35 +25,35 @@ export default function ActionButton({content, icon, onPress}) {
           </Text>
           {icon}
         </View>
-      </TouchableHighlight>
+      </TouchableOpacity>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-    container : {
-        marginEnd: 10,
-        marginStart: 10,
-        textAlign: 'center',
-    },
+  container: {
+    marginEnd: 10,
+    marginStart: 10,
+    textAlign: 'center',
+  },
 
-    touchButton: {
-        // backgroundColor: '#FFFFFF',
-        // borderColor: '#E5E5E5',
-        // borderWidth: 1,
-        // borderRadius: 3,
-        height: 57,
-    },
+  touchButton: {
+    // backgroundColor: '#FFFFFF',
+    // borderColor: '#E5E5E5',
+    // borderWidth: 1,
+    // borderRadius: 3,
+    height: 57,
+  },
 
-    wrapper: {
-        flex: 1,
-        flexDirection: 'row',
-        justifyContent: 'center',
-        alignItems: 'center',
-        padding: 10,
-    },
+  wrapper: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 10,
+  },
 
-    images: {
-      maxWidth: "100%",
-    }
-})
+  images: {
+    maxWidth: '100%',
+  },
+});

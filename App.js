@@ -25,20 +25,15 @@ import {
   LearnMoreLinks,
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
-
-import {createStackNavigator} from '@react-navigation/stack';
-import {NavigationContainer} from '@react-navigation/native';
-import HomeScreenCategoryList from './src/Screens/U1CategoryLists';
-
-const Stack = createStackNavigator();
+import {Provider} from 'react-redux';
+import Navigation from './src/Navigation';
+import store from './src/store';
 
 const App: () => Node = () => {
   return (
-    <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen name="HomeScreen" component={HomeScreenCategoryList} />
-      </Stack.Navigator>
-    </NavigationContainer>
+    <Provider store={store}>
+      <Navigation />
+    </Provider>
   );
 };
 

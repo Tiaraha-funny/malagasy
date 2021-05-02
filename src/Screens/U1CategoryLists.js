@@ -1,11 +1,11 @@
 import React, {useCallback, useEffect, useState} from 'react';
 import {SafeAreaView, ScrollView, StyleSheet, Text, View} from 'react-native';
+
 import Lists from '../components/Lists/Lists';
 import ToolButton from '../components/ToolButton/ToolButton';
 import SectionHeading from '../components/SectionHeading/SectionHeading';
 import LanguageSwitcherButton from '../components/LanguageSwitcherButton/SwitcherButton';
 
-import LeftArrowSvg from '../icons/left-arrow.svg';
 import DoubleTickSvg from '../icons/double-tick.svg';
 import TickSvg from '../icons/tick.svg';
 import ModeSvg from '../icons/mode.svg';
@@ -13,14 +13,21 @@ import PlusSvg from '../icons/plus.svg';
 import LearnSvg from '../icons/learn.svg';
 import SwitcherSvg from '../icons/switcher.svg';
 import DatacategoryLists from '../data/categories.json';
+
 function RenderChildren({children}) {
-  // console.log('children', children);
   return <View>{children}</View>;
 }
-export default function HomeScreenCategoryList() {
+
+export default function HomeScreenCategoryList({navigation}) {
   const [switcherLang, setSwitcherLang] = useState(false);
-  const toggleCallBack = useCallback(() => setSwitcherLang(!switcherLang));
-  const [categoryLists, setCategoryLists] = useState([]);
+
+  function toggleCallBack() {
+    setSwitcherLang(!switcherLang);
+  }
+
+  useEffect(() => {
+    toggleCallBack();
+  }, []);
 
   let primary = 'en';
   let secondary = 'ma';
@@ -36,8 +43,9 @@ export default function HomeScreenCategoryList() {
         <LanguageSwitcherButton
           icon={<SwitcherSvg />}
           onPress={toggleCallBack}
-          primaryText={primary}
-          secondaryText={secondary}
+          primary={primary}
+          secondary={secondary}
+          style={styles.switch}
         />
         <ToolButton icon={<TickSvg />} onPress={() => alert('I am clicked')} />
         <ToolButton
@@ -54,7 +62,7 @@ export default function HomeScreenCategoryList() {
               DatacategoryLists.categories.map((item, index) => (
                 <Lists
                   key={item.id}
-                  onPressButton={() => alert('Clicked button')}
+                  onPressButton={() => navigation.navigate('LearnScreen')}
                   data={item.name.en}
                   text={'Learn'}
                   icon={<LearnSvg />}
@@ -76,5 +84,8 @@ const styles = StyleSheet.create({
   },
   listcategoryWrapper: {
     paddingTop: 20,
+  },
+  switch: {
+    margin: 0,
   },
 });
