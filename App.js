@@ -27,7 +27,9 @@ import {
 } from 'react-native/Libraries/NewAppScreen';
 import {Provider} from 'react-redux';
 import Navigation from './src/Navigation';
-import store from './src/store';
+// import store from './src/store';
+import getStore from './src/store';
+const store = getStore();
 
 const App: () => Node = () => {
   return (

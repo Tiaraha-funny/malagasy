@@ -3,8 +3,8 @@ import thunk from 'redux-thunk';
 import reducers from '../src/Redux';
 import state from '../src/state';
 
-const store = () => {
+const getStore = () => {
   return createStore(reducers, state, applyMiddleware(thunk));
 };
 
-export default store;
+export default getStore;
