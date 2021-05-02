@@ -8,14 +8,16 @@ import {
   ScrollView,
   TouchableOpacity,
 } from 'react-native';
-import ListItems from '../ListItem/ListItem';
 
-function Lists({data, text, icon, children, onPressButton}) {
+import ListItems from '../ListItem/ListItem';
+import datacategoryLists from '../../data/categories.json';
+
+function Lists({text, icon, children, onPressButton}) {
   return (
     <ScrollView>
       <SafeAreaView style={styles.container}>
-        {data &&
-          data.map((item, index) => (
+        {datacategoryLists &&
+          datacategoryLists.categories.map((item, index) => (
             <TouchableOpacity
               style={styles.listItem}
               key={item.id}
@@ -36,7 +38,10 @@ function Lists({data, text, icon, children, onPressButton}) {
 export default Lists;
 
 const styles = StyleSheet.create({
-  container: {},
+  container: {
+    marginStart: 15,
+    marginEnd: 15,
+  },
 
   listItem: {
     fontSize: 20,
