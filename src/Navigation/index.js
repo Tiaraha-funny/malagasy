@@ -3,7 +3,7 @@ import React from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
 import {NavigationContainer} from '@react-navigation/native';
 import HomeScreenCategoryList from '../../src/Screens/U1CategoryLists';
-import LearningScreenDisplayPhrases from '../../src/Screens/U2DisplayPhrases';
+import LearningScreenDisplayPhrases from '../../src/Screens/U8DisplayPhrases';
 
 const Stack = createStackNavigator();
 

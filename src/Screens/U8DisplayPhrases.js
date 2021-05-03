@@ -12,7 +12,7 @@ import ModeSvg from '../icons/mode.svg';
 import SwitcherSvg from '../icons/switcher.svg';
 import ListItems from '../components/ListItem/ListItem';
 
-function LearningScreenDisplayPhrases() {
+function LearningScreenDisplayPhrases({navigation}) {
   const [switcherLang, setSwitcherLang] = useState(false);
 
   function toggleCallBack() {
@@ -34,7 +34,7 @@ function LearningScreenDisplayPhrases() {
     <SafeAreaView>
       <View style={styles.wrapper}>
         <ToolButton
-          onPress={() => alert('I am back button')}
+          onPress={() => navigation.navigate('HomeScreen')}
           icon={<BackSvg />}
         />
         <ToolButton

@@ -39,7 +39,10 @@ export default function HomeScreenCategoryList({navigation}) {
   return (
     <SafeAreaView>
       <View style={styles.wrapper}>
-        <ToolButton icon={<PlusSvg />} onPress={() => alert('I am clicked')} />
+        <ToolButton
+          icon={<PlusSvg />}
+          onPress={() => navigation.navigate('LearnScreen')}
+        />
         <LanguageSwitcherButton
           icon={<SwitcherSvg />}
           onPress={toggleCallBack}
