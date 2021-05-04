@@ -64,6 +64,7 @@ export default function HomeScreenCategoryList({navigation}) {
           <SectionHeading text={'Select a category'} />
           <ScrollView>
             {DatacategoryLists &&
+              DatacategoryLists.categories &&
               DatacategoryLists.categories.map((item, index) => (
                 <Lists
                   key={item.id}

@@ -17,6 +17,7 @@ function Lists({text, icon, children, onPressButton}) {
     <ScrollView>
       <SafeAreaView style={styles.container}>
         {datacategoryLists &&
+          datacategoryLists.categories &&
           datacategoryLists.categories.map((item, index) => (
             <TouchableOpacity
               style={styles.listItem}

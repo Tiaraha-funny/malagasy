@@ -16,29 +16,53 @@ import ListItems from '../components/ListItem/ListItem';
 import {userManager} from '../Util/userManager';
 
 function LearningScreenDisplayPhrases({route, navigation}) {
-  const {
-    toggleCallBack,
-    primary,
-    secondary,
-    categoryList,
-    getCategory,
-    loading,
-  } = userManager();
+  const {toggleCallBack, primary, secondary, phrases} = userManager();
 
   //To get the id from anywhere
-  const {itemId} = route.params;
-
-  console.log('params', itemId);
+  const params = route.params.itemId;
 
   //For the category title
   const categoryTitle =
     Datacategories &&
     Datacategories.categories &&
-    Datacategories.categories.find(categoryId => categoryId.id === itemId);
+    Datacategories.categories.find(categoryId => categoryId.id === params);
 
   //To get the id in the phrase
   const getPhraseIds = categoryTitle.id;
-  console.log('id', itemId);
+
+  const randomePhrasesIds =
+    getPhraseIds[Math.floor(Math.random() * getPhraseIds.length)];
+
+  const displayIdPhrase = phrases.find(phr =>
+    phr.id.includes(randomePhrasesIds),
+  );
+
+  console.log(displayIdPhrase);
+
+  const matcheTheIds = phrases.filter(phr =>
+    phr.id.includes(randomePhrasesIds.substring(0, 4)),
+  );
+
+  const moreOptions = matcheTheIds.filter(id => id.id !== displayIdPhrase.id);
+
+  const randomOne = moreOptions[Math.floor(Math.random() * moreOptions.length)];
+  const randomTwo = moreOptions[Math.floor(Math.random() * moreOptions.length)];
+  const randomThree =
+    moreOptions[Math.floor(Math.random() * moreOptions.length)];
+  const randomFourth =
+    moreOptions[Math.floor(Math.random() * moreOptions.length)];
+
+  const randomeAllOptions = [
+    displayIdPhrase,
+    randomOne.name,
+    randomTwo.name,
+    randomThree.name,
+    randomFourth.name,
+  ];
+
+  const chooseAnswers = randomeAllOptions.sort(function () {
+    return 0.5 - Math.random();
+  });
 
   return (
     <SafeAreaView>
@@ -65,7 +89,7 @@ function LearningScreenDisplayPhrases({route, navigation}) {
         </View>
         <SectionHeading text={'The phrase'} />
         <View style={styles.phraseStyle}>
-          <PhrasesTextarea phrase={'roa'} />
+          <PhrasesTextarea phrase={'displayIdPhrase.name.mg'} />
         </View>
         <SectionHeading text={'Pick a solution'} />
 
