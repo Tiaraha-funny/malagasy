@@ -7,11 +7,15 @@ import LearnSvg from '../../icons/learn.svg';
 storiesOf('Lists', module).add('list', () => <HandleList />);
 
 function HandleList() {
+  const [loading, setLoading] = useState(true);
   const [categoryLists, setcategoryLists] = useState([]);
 
   useEffect(() => {
     setcategoryLists(Datacategories);
-  }, []);
+    setLoading(false);
+  }, [loading]);
+
+  const getCategories = loading && categoryLists && categoryLists.categories;
 
   return (
     <Lists
@@ -19,6 +23,8 @@ function HandleList() {
       text={'Learn'}
       icon={<LearnSvg />}
       data={categoryLists}
+      categoryLists={getCategories}
+      loading={loading}
     />
   );
 }

@@ -13,12 +13,14 @@ import PlusSvg from '../icons/plus.svg';
 import LearnSvg from '../icons/learn.svg';
 import SwitcherSvg from '../icons/switcher.svg';
 import DatacategoryLists from '../data/categories.json';
+import {userManager} from '../Util/userManager';
 
 function RenderChildren({children}) {
   return <View>{children}</View>;
 }
 
 export default function HomeScreenCategoryList({navigation}) {
+  const {loading} = userManager();
   const [switcherLang, setSwitcherLang] = useState(false);
 
   function toggleCallBack() {
@@ -65,7 +67,11 @@ export default function HomeScreenCategoryList({navigation}) {
               DatacategoryLists.categories.map((item, index) => (
                 <Lists
                   key={item.id}
-                  onPressButton={() => navigation.navigate('LearnScreen')}
+                  onPressButton={() =>
+                    navigation.navigate('LearnScreen', {
+                      itemId: item.id,
+                    })
+                  }
                   data={item.name.en}
                   text={'Learn'}
                   icon={<LearnSvg />}
@@ -77,6 +83,7 @@ export default function HomeScreenCategoryList({navigation}) {
     </SafeAreaView>
   );
 }
+
 const styles = StyleSheet.create({
   wrapper: {
     flexDirection: 'row',

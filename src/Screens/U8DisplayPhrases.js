@@ -6,29 +6,39 @@ import PhrasesTextarea from '../components/PhrasesTextarea/PhrasesTextarea';
 import SectionHeading from '../components/SectionHeading/SectionHeading';
 import ToolButton from '../components/ToolButton/ToolButton';
 
+import Datacategories from '../data/categories.json';
+
 import LearnSvg from '../icons/learn.svg';
 import BackSvg from '../icons/back.svg';
 import ModeSvg from '../icons/mode.svg';
 import SwitcherSvg from '../icons/switcher.svg';
 import ListItems from '../components/ListItem/ListItem';
+import {userManager} from '../Util/userManager';
 
-function LearningScreenDisplayPhrases({navigation}) {
-  const [switcherLang, setSwitcherLang] = useState(false);
+function LearningScreenDisplayPhrases({route, navigation}) {
+  const {
+    toggleCallBack,
+    primary,
+    secondary,
+    categoryList,
+    getCategory,
+    loading,
+  } = userManager();
 
-  function toggleCallBack() {
-    setSwitcherLang(!switcherLang);
-  }
+  //To get the id from anywhere
+  const {itemId} = route.params;
 
-  useEffect(() => {
-    toggleCallBack();
-  }, []);
+  console.log('params', itemId);
 
-  let primary = 'en';
-  let secondary = 'ma';
-  if (switcherLang) {
-    primary = 'ma';
-    secondary = 'en';
-  }
+  //For the category title
+  const categoryTitle =
+    Datacategories &&
+    Datacategories.categories &&
+    Datacategories.categories.find(categoryId => categoryId.id === itemId);
+
+  //To get the id in the phrase
+  const getPhraseIds = categoryTitle.id;
+  console.log('id', itemId);
 
   return (
     <SafeAreaView>
@@ -49,9 +59,14 @@ function LearningScreenDisplayPhrases({navigation}) {
         />
       </View>
       <View style={styles.group}>
-        <SectionHeading text={'Category'} />
+        <View style={styles.title}>
+          <SectionHeading text={'Category'} />
+          <Text>{categoryTitle.name.en}</Text>
+        </View>
         <SectionHeading text={'The phrase'} />
-        <PhrasesTextarea phrase={'roa'} />
+        <View style={styles.phraseStyle}>
+          <PhrasesTextarea phrase={'roa'} />
+        </View>
         <SectionHeading text={'Pick a solution'} />
 
         <View style={styles.buttonsWrapper}>
@@ -111,6 +126,15 @@ const styles = StyleSheet.create({
   group: {
     paddingTop: 25,
     color: '#111827',
+  },
+
+  phraseStyle: {
+    marginTop: 0,
+  },
+
+  title: {
+    flexDirection: 'row',
+    alignItems: 'center',
   },
 });
 export default LearningScreenDisplayPhrases;

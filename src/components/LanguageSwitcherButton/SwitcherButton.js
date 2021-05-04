@@ -28,6 +28,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     maxWidth: 90,
     height: 40,
+    margin: 7,
   },
 
   wrapper: {
@@ -42,5 +43,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontWeight: '600',
     textTransform: 'uppercase',
+    marginLeft: 5,
+    marginRight: 5,
   },
 });
