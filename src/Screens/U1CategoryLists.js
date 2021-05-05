@@ -1,11 +1,11 @@
 import React, {useCallback, useEffect, useState} from 'react';
 import {SafeAreaView, ScrollView, StyleSheet, Text, View} from 'react-native';
-
 import Lists from '../components/Lists/Lists';
 import ToolButton from '../components/ToolButton/ToolButton';
 import SectionHeading from '../components/SectionHeading/SectionHeading';
 import LanguageSwitcherButton from '../components/LanguageSwitcherButton/SwitcherButton';
 
+import LeftArrowSvg from '../icons/left-arrow.svg';
 import DoubleTickSvg from '../icons/double-tick.svg';
 import TickSvg from '../icons/tick.svg';
 import ModeSvg from '../icons/mode.svg';
@@ -20,38 +20,27 @@ function RenderChildren({children}) {
 }
 
 export default function HomeScreenCategoryList({navigation}) {
-  const {loading} = userManager();
-  const [switcherLang, setSwitcherLang] = useState(false);
-
-  function toggleCallBack() {
-    setSwitcherLang(!switcherLang);
-  }
-
-  useEffect(() => {
-    toggleCallBack();
-  }, []);
-
-  let primary = 'en';
-  let secondary = 'ma';
-  if (switcherLang) {
-    primary = 'ma';
-    secondary = 'en';
-  }
+  const {toggleSwitcher, primary, secondary, isEnglish} = userManager();
 
   return (
     <SafeAreaView>
       <View style={styles.wrapper}>
         <ToolButton
           icon={<PlusSvg />}
-          onPress={() => navigation.navigate('LearnScreen')}
+          onPress={() =>
+            alert(
+              'Hi!!, Please, you have to click one of the list to get an id!!',
+            )
+          }
         />
+
         <LanguageSwitcherButton
           icon={<SwitcherSvg />}
-          onPress={toggleCallBack}
+          onPress={toggleSwitcher}
           primary={primary}
           secondary={secondary}
-          style={styles.switch}
         />
+
         <ToolButton icon={<TickSvg />} onPress={() => alert('I am clicked')} />
         <ToolButton
           icon={<DoubleTickSvg />}
@@ -59,12 +48,14 @@ export default function HomeScreenCategoryList({navigation}) {
         />
         <ToolButton icon={<ModeSvg />} onPress={() => alert('I am clicked')} />
       </View>
+
       <View style={styles.listcategoryWrapper}>
         <RenderChildren>
-          <SectionHeading text={'Select a category'} />
+          <SectionHeading
+            text={isEnglish ? 'Select a category' : 'Fidio ny sokajy'}
+          />
           <ScrollView>
             {DatacategoryLists &&
-              DatacategoryLists.categories &&
               DatacategoryLists.categories.map((item, index) => (
                 <Lists
                   key={item.id}
@@ -73,9 +64,6 @@ export default function HomeScreenCategoryList({navigation}) {
                       itemId: item.id,
                     })
                   }
-                  data={item.name.en}
-                  text={'Learn'}
-                  icon={<LearnSvg />}
                 />
               ))}
           </ScrollView>
@@ -95,8 +83,5 @@ const styles = StyleSheet.create({
   },
   listcategoryWrapper: {
     paddingTop: 20,
-  },
-  switch: {
-    margin: 0,
   },
 });

@@ -22,7 +22,7 @@ function HandleSwitcherClick() {
   let primary = 'en';
   let secondary = 'ma';
 
-  if (switcherLang) {
+  if (switcherLang === true) {
     primary = 'ma';
     secondary = 'en';
   }

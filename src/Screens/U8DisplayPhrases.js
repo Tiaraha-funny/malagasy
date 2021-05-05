@@ -1,5 +1,12 @@
 import React, {useState, useCallback, useEffect} from 'react';
-import {View, Text, SafeAreaView, StyleSheet} from 'react-native';
+import {
+  View,
+  Text,
+  SafeAreaView,
+  StyleSheet,
+  TouchableOpacity,
+  FlatList,
+} from 'react-native';
 import ActionButton from '../components/ActionButton/ActionButton';
 import LanguageSwitcherButton from '../components/LanguageSwitcherButton/SwitcherButton';
 import PhrasesTextarea from '../components/PhrasesTextarea/PhrasesTextarea';
@@ -7,6 +14,7 @@ import SectionHeading from '../components/SectionHeading/SectionHeading';
 import ToolButton from '../components/ToolButton/ToolButton';
 
 import Datacategories from '../data/categories.json';
+import PhrasesLists from '../data/phrases.json';
 
 import LearnSvg from '../icons/learn.svg';
 import BackSvg from '../icons/back.svg';
@@ -16,53 +24,59 @@ import ListItems from '../components/ListItem/ListItem';
 import {userManager} from '../Util/userManager';
 
 function LearningScreenDisplayPhrases({route, navigation}) {
-  const {toggleCallBack, primary, secondary, phrases} = userManager();
+  const {toggleSwitcher, primary, secondary, isEnglish} = userManager();
 
   //To get the id from anywhere
-  const params = route.params.itemId;
+  const paramsId = route.params.itemId;
+  // console.log('params', params);
 
   //For the category title
   const categoryTitle =
     Datacategories &&
     Datacategories.categories &&
-    Datacategories.categories.find(categoryId => categoryId.id === params);
+    Datacategories.categories.find(categoryId => categoryId.id == paramsId);
+
+  //Get the phrases from JSON file
+
+  const phrases = PhrasesLists.phrases;
 
   //To get the id in the phrase
-  const getPhraseIds = categoryTitle.id;
+  const getPhraseIds = categoryTitle && categoryTitle.id;
 
   const randomePhrasesIds =
     getPhraseIds[Math.floor(Math.random() * getPhraseIds.length)];
 
-  const displayIdPhrase = phrases.find(phr =>
-    phr.id.includes(randomePhrasesIds),
-  );
+  const displayIdPhrase =
+    phrases && phrases.find(phr => phr.id.includes(randomePhrasesIds));
 
-  console.log(displayIdPhrase);
+  const matcheTheIds =
+    phrases &&
+    phrases.filter(phr => phr.id.includes(randomePhrasesIds.substring(0, 4)));
 
-  const matcheTheIds = phrases.filter(phr =>
-    phr.id.includes(randomePhrasesIds.substring(0, 4)),
-  );
+  const moreOptions =
+    matcheTheIds && matcheTheIds.filter(id => id.id !== displayIdPhrase.id);
 
-  const moreOptions = matcheTheIds.filter(id => id.id !== displayIdPhrase.id);
-
-  const randomOne = moreOptions[Math.floor(Math.random() * moreOptions.length)];
-  const randomTwo = moreOptions[Math.floor(Math.random() * moreOptions.length)];
+  const randomOne =
+    moreOptions && moreOptions[Math.floor(Math.random() * moreOptions.length)];
+  const randomTwo =
+    moreOptions && moreOptions[Math.floor(Math.random() * moreOptions.length)];
   const randomThree =
-    moreOptions[Math.floor(Math.random() * moreOptions.length)];
+    moreOptions && moreOptions[Math.floor(Math.random() * moreOptions.length)];
   const randomFourth =
-    moreOptions[Math.floor(Math.random() * moreOptions.length)];
+    moreOptions && moreOptions[Math.floor(Math.random() * moreOptions.length)];
 
   const randomeAllOptions = [
-    displayIdPhrase,
-    randomOne.name,
-    randomTwo.name,
-    randomThree.name,
-    randomFourth.name,
+    randomOne?.name,
+    randomTwo?.name,
+    randomThree?.name,
+    randomFourth?.name,
   ];
 
   const chooseAnswers = randomeAllOptions.sort(function () {
     return 0.5 - Math.random();
   });
+
+  console.log('answer', chooseAnswers);
 
   return (
     <SafeAreaView>
@@ -77,49 +91,43 @@ function LearningScreenDisplayPhrases({route, navigation}) {
         />
         <LanguageSwitcherButton
           icon={<SwitcherSvg />}
-          onPress={toggleCallBack}
+          onPress={toggleSwitcher}
           primary={primary}
           secondary={secondary}
         />
       </View>
       <View style={styles.group}>
         <View style={styles.title}>
-          <SectionHeading text={'Category'} />
-          <Text>{categoryTitle.name.en}</Text>
+          <SectionHeading text={isEnglish ? 'Category' : 'Sokajy'} />
+          <Text>
+            {isEnglish ? categoryTitle.name.en : categoryTitle.name.en}
+          </Text>
         </View>
-        <SectionHeading text={'The phrase'} />
+        <SectionHeading text={isEnglish ? 'The phrase' : 'Andian-teny'} />
         <View style={styles.phraseStyle}>
-          <PhrasesTextarea phrase={'displayIdPhrase.name.mg'} />
+          <PhrasesTextarea
+            phrase={
+              !isEnglish ? displayIdPhrase?.name?.en : displayIdPhrase?.name?.mg
+            }
+          />
         </View>
-        <SectionHeading text={'Pick a solution'} />
+        <SectionHeading
+          text={isEnglish ? 'Pick a solution' : 'Fidio ny validy'}
+        />
 
-        <View style={styles.buttonsWrapper}>
-          <ListItems
-            category={'five'}
-            onPress={() => alert('action true or false')}
-          />
-          <ActionButton icon={<LearnSvg />} content={'pick'} />
-        </View>
-        <View style={styles.buttonsWrapper}>
-          <ListItems
-            category={'two'}
-            onPress={() => alert('action true or false')}
-          />
-          <ActionButton icon={<LearnSvg />} content={'pick'} />
-        </View>
-        <View style={styles.buttonsWrapper}>
-          <ListItems
-            category={'one'}
-            onPress={() => alert('action true or false')}
-          />
-          <ActionButton icon={<LearnSvg />} content={'pick'} />
-        </View>
-        <View style={styles.buttonsWrapper}>
-          <ListItems
-            category={'thre'}
-            onPress={() => alert('action true or false')}
-          />
-          <ActionButton icon={<LearnSvg />} content={'pick'} />
+        <View>
+          {chooseAnswers &&
+            chooseAnswers.map(answer => {
+              return (
+                <TouchableOpacity
+                  key={answer.id}
+                  style={styles.buttonsWrapper}
+                  onPress={() => alert('clicked')}>
+                  <ListItems category={isEnglish ? answer.en : answer.mg} />
+                  <ActionButton icon={<LearnSvg />} content={'pick'} />
+                </TouchableOpacity>
+              );
+            })}
         </View>
       </View>
     </SafeAreaView>

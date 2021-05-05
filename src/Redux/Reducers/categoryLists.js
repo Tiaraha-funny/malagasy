@@ -1,10 +1,10 @@
-// export default function phrases(state = {}, action) {
+// export default function categoryList(state = {}, action) {
 //   switch (action.type) {
-//     case 'GET_PHRASES':
+//     case 'CATEGORY_LIST':
 //       return {
 //         ...state,
 //         categoryList: action.payload,
-//         isLoading: !action.isLoading,
+//         loading: !action.isLoading,
 //       };
 //     default:
 //       return state;

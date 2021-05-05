@@ -1,6 +1,6 @@
-export default {
-  categoryList: {},
-  phrases: {},
-  // seenPhrases: [],
-  // learntPhrases: [],
-};
+// export default {
+//   categoryList: {},
+//   phrases: {},
+//   // seenPhrases: [],
+//   // learntPhrases: [],
+// };
