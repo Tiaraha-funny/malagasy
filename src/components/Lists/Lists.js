@@ -22,7 +22,7 @@ function Lists({text, icon, children, onPressButton}) {
               style={styles.listItem}
               key={item.id}
               onPress={onPressButton}>
-              <ListItems category={item.name.en}>
+              <ListItems category={item.name.en} itemId={item.id}>
                 <View style={styles.group}>
                   <Text style={styles.content}>{text}</Text>
                   {icon}

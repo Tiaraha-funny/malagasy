@@ -34,14 +34,13 @@ function LearningScreenDisplayPhrases({route, navigation}) {
   const categoryTitle =
     Datacategories &&
     Datacategories.categories &&
-    Datacategories.categories.find(categoryId => categoryId.id == paramsId);
+    Datacategories.categories.find(categoryId => categoryId.id === paramsId);
 
   //Get the phrases from JSON file
-
   const phrases = PhrasesLists.phrases;
 
   //To get the id in the phrase
-  const getPhraseIds = categoryTitle && categoryTitle.id;
+  const getPhraseIds = categoryTitle && categoryTitle.phrasesIds;
 
   const randomePhrasesIds =
     getPhraseIds[Math.floor(Math.random() * getPhraseIds.length)];
@@ -76,6 +75,9 @@ function LearningScreenDisplayPhrases({route, navigation}) {
     return 0.5 - Math.random();
   });
 
+  console.log('title', categoryTitle.name.mg);
+  console.log('should title', categoryTitle);
+  console.log('phrase', displayIdPhrase?.name?.en);
   console.log('answer', chooseAnswers);
 
   return (
@@ -122,7 +124,7 @@ function LearningScreenDisplayPhrases({route, navigation}) {
                 <TouchableOpacity
                   key={answer.id}
                   style={styles.buttonsWrapper}
-                  onPress={() => alert('clicked')}>
+                  onPress={() => navigation.navigate('ValidateAnswer')}>
                   <ListItems category={isEnglish ? answer.en : answer.mg} />
                   <ActionButton icon={<LearnSvg />} content={'pick'} />
                 </TouchableOpacity>

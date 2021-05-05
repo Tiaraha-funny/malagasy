@@ -60,7 +60,7 @@ export default function HomeScreenCategoryList({navigation}) {
                 <Lists
                   key={item.id}
                   onPressButton={() =>
-                    navigation.navigate('LearnScreen', {
+                    navigation.navigate('DisplayPhrases', {
                       itemId: item.id,
                     })
                   }
