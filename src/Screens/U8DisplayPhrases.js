@@ -122,10 +122,7 @@ function LearningScreenDisplayPhrases({route, navigation}) {
           {chooseAnswers &&
             chooseAnswers.map(answer => {
               return (
-                <TouchableOpacity
-                  key={answer.id}
-                  style={styles.buttonsWrapper}
-                  onPress={() => navigation.navigate('ValidateAnswer')}>
+                <TouchableOpacity key={answer.id} style={styles.buttonsWrapper}>
                   <ListItems category={isEnglish ? answer.en : answer.mg} />
                   <ActionButton icon={<LearnSvg />} content={'pick'} />
                 </TouchableOpacity>

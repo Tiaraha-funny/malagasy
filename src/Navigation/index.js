@@ -4,7 +4,7 @@ import {createStackNavigator} from '@react-navigation/stack';
 import {NavigationContainer} from '@react-navigation/native';
 import HomeScreenCategoryList from '../../src/Screens/U1CategoryLists';
 import LearningScreenDisplayPhrases from '../../src/Screens/U8DisplayPhrases';
-import ValidateAnswers from '../Screens/U9ValidateAnswers';
+// import ValidateAnswers from '../Screens/U9ValidateAnswers';
 
 const Stack = createStackNavigator();
 
@@ -17,7 +17,7 @@ const ScreenSatck = () => {
           name="DisplayPhrases"
           component={LearningScreenDisplayPhrases}
         />
-        <Stack.Screen name="ValidateAnswer" component={ValidateAnswers} />
+        {/* <Stack.Screen name="ValidateAnswer" component={ValidateAnswers} /> */}
       </Stack.Navigator>
     </NavigationContainer>
   );
