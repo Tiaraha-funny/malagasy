@@ -29,6 +29,7 @@ function LearningScreenDisplayPhrases({route, navigation}) {
   //To get the id from anywhere
   const paramsId = route.params.itemId;
   // console.log('params', params);
+  console.log('id', route);
 
   //For the category title
   const categoryTitle =
@@ -77,7 +78,7 @@ function LearningScreenDisplayPhrases({route, navigation}) {
 
   console.log('title', categoryTitle.name.mg);
   console.log('should title', categoryTitle);
-  console.log('phrase', displayIdPhrase?.name?.en);
+  console.log('phrase', displayIdPhrase?.name?.en, displayIdPhrase?.name?.mg);
   console.log('answer', chooseAnswers);
 
   return (
