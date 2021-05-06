@@ -24,14 +24,19 @@ export const getAllPhrases = () => {
 };
 
 export const findPhraseCategories = phraseId => {
-  return phrasesData.phrases;
+  const phraseData = phrasesData.phrases;
+  return phrasesData && phrasesData.find(item => item.id === phraseId);
 };
 
 export function findCategoryById(id) {
-  throw 'not implemented!';
+  const category = categoriesData.categories;
+  return (category && category.find(cat => cat.id === id)) || null;
+  // throw 'not implemented!';
   // TODO implement
 }
 export function findPhraseById(id) {
-  throw 'not implemented!';
+  const phrase = phrasesData.phrases;
+  return (phrase && phrase.find(item => item.id === id)) || null;
+  // throw 'not implemented!';
   // TODO implement
 }

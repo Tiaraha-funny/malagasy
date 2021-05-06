@@ -19,6 +19,7 @@ function HandleList() {
       text={'Learn'}
       icon={<LearnSvg />}
       data={categoryLists}
+      itemId={categoryLists && categoryLists?.categoryLists}
     />
   );
 }

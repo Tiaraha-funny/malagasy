@@ -9,15 +9,30 @@ storiesOf('Language Switcher Button', module)
   .add('switch', () => <HandleSwitcherClick />);
 
 function HandleSwitcherClick() {
-  const [switcherLang, setSwitcherLang] = React.useState(false);
-  const toggleCallBack = React.useCallback(() =>
-    setSwitcherLang(!switcherLang),
-  );
+  const [switcherLang, setSwitcherLang] = useState(false);
+
+  function toggleCallBack() {
+    setSwitcherLang(!switcherLang);
+  }
+
+  React.useEffect(() => {
+    toggleCallBack();
+  }, []);
+
+  let primary = 'en';
+  let secondary = 'ma';
+
+  if (switcherLang === true) {
+    primary = 'ma';
+    secondary = 'en';
+  }
 
   return (
     <LanguageSwitcherButton
       icon={<SwitcherSvg />}
       onPress={toggleCallBack}
+      primary={primary}
+      secondary={secondary}
       switcherLang={switcherLang}
     />
   );

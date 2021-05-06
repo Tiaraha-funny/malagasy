@@ -8,38 +8,11 @@
 
 import React from 'react';
 import type {Node} from 'react';
-import {
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
-  StyleSheet,
-  Text,
-  useColorScheme,
-  View,
-} from 'react-native';
 
-import {
-  Colors,
-  DebugInstructions,
-  Header,
-  LearnMoreLinks,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
-
-import {createStackNavigator} from '@react-navigation/stack';
-import {NavigationContainer} from '@react-navigation/native';
-import HomeScreenCategoryList from './src/Screens/U1CategoryLists';
-
-const Stack = createStackNavigator();
+import Navigation from './src/Navigation';
 
 const App: () => Node = () => {
-  return (
-    <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen name="HomeScreen" component={HomeScreenCategoryList} />
-      </Stack.Navigator>
-    </NavigationContainer>
-  );
+  return <Navigation />;
 };
 
 export default App;

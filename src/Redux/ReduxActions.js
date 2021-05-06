@@ -1,27 +1,39 @@
-import React from 'react';
-import HOME_SCREEN_CATEGORY_LIST from '../Constants';
-import categoryList from '../data/categories.json';
+// import React from 'react';
+// import CategoryList from '../data/categories.json';
+// import Phrases from '../data/phrases.json';
 
-export function CategoryList() {
-  return async dispatch => {
-    dispatch({
-      type: HOME_SCREEN_CATEGORY_LIST,
-      payload: categoryList,
-      loading: true,
-    });
-  };
-}
+// export function getCategoryList() {
+//   return async dispatch => {
+//     return dispatch({
+//       type: 'CATEGORY_LIST',
+//       payload: CategoryList,
+//       loading: true,
+//       isEnglish: true,
+//       switcherButton: true,
+//     });
+//   };
+// }
 
-export function SeenPrases(phrases) {
-  return {
-    type: SEEN_PRASES,
-    payload: phrases,
-  };
-}
+// export function getPhrases() {
+//   return async dispatch => {
+//     dispatch({
+//       type: 'GET_PHRASES',
+//       payload: Phrases,
+//       loading: true,
+//     });
+//   };
+// }
 
-export function LearntPrases(phrases) {
-  return {
-    type: LEARNT_PHRASES,
-    payload: prases,
-  };
-}
+// export function getSeenPhrases(phrases) {
+//   return {
+//     type: 'SEEN_PRASES',
+//     payload: phrases,
+//   };
+// }
+
+// export function getLearntPrases(phrases) {
+//   return {
+//     type: 'LEARNT_PHRASES',
+//     payload: prases,
+//   };
+// }

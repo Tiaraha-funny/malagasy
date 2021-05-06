@@ -1,15 +1,13 @@
 import * as React from 'react';
 import {StyleSheet, Text, View, TouchableOpacity} from 'react-native';
 
-export default function LanguageSwitcherButton({icon, onPress, switcherLang}) {
-  let primary = 'en';
-  let secondary = 'ma';
-
-  if (switcherLang) {
-    primary = 'ma';
-    secondary = 'en';
-  }
-
+export default function LanguageSwitcherButton({
+  icon,
+  onPress,
+  switcherLang,
+  primary,
+  secondary,
+}) {
   return (
     <View style={styles.container}>
       <TouchableOpacity onPress={onPress}>
@@ -30,7 +28,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     maxWidth: 90,
     height: 40,
-    margin: 20,
+    margin: 7,
   },
 
   wrapper: {
@@ -45,5 +43,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontWeight: '600',
     textTransform: 'uppercase',
+    marginLeft: 5,
+    marginRight: 5,
   },
 });

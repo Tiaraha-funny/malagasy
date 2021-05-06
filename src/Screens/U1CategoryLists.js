@@ -13,32 +13,35 @@ import PlusSvg from '../icons/plus.svg';
 import LearnSvg from '../icons/learn.svg';
 import SwitcherSvg from '../icons/switcher.svg';
 import DatacategoryLists from '../data/categories.json';
+import {userManager} from '../Util/userManager';
+
+//Get the children of the importing files
 function RenderChildren({children}) {
-  // console.log('children', children);
   return <View>{children}</View>;
 }
-export default function HomeScreenCategoryList() {
-  const [switcherLang, setSwitcherLang] = useState(false);
-  const toggleCallBack = useCallback(() => setSwitcherLang(!switcherLang));
-  const [categoryLists, setCategoryLists] = useState([]);
 
-  let primary = 'en';
-  let secondary = 'ma';
-  if (switcherLang) {
-    primary = 'ma';
-    secondary = 'en';
-  }
+export default function HomeScreenCategoryList({navigation}) {
+  const {toggleSwitcher, primary, secondary, isEnglish} = userManager();
 
   return (
     <SafeAreaView>
       <View style={styles.wrapper}>
-        <ToolButton icon={<PlusSvg />} onPress={() => alert('I am clicked')} />
+        <ToolButton
+          icon={<PlusSvg />}
+          onPress={() =>
+            alert(
+              'Hi!!, Please, you have to click one of the list to get an id!!',
+            )
+          }
+        />
+
         <LanguageSwitcherButton
           icon={<SwitcherSvg />}
-          onPress={toggleCallBack}
-          primaryText={primary}
-          secondaryText={secondary}
+          onPress={toggleSwitcher}
+          primary={primary}
+          secondary={secondary}
         />
+
         <ToolButton icon={<TickSvg />} onPress={() => alert('I am clicked')} />
         <ToolButton
           icon={<DoubleTickSvg />}
@@ -46,18 +49,22 @@ export default function HomeScreenCategoryList() {
         />
         <ToolButton icon={<ModeSvg />} onPress={() => alert('I am clicked')} />
       </View>
+
       <View style={styles.listcategoryWrapper}>
         <RenderChildren>
-          <SectionHeading text={'Select a category'} />
+          <SectionHeading
+            text={isEnglish ? 'Select a category' : 'Fidio ny sokajy'}
+          />
           <ScrollView>
             {DatacategoryLists &&
               DatacategoryLists.categories.map((item, index) => (
                 <Lists
                   key={item.id}
-                  onPressButton={() => alert('Clicked button')}
-                  data={item.name.en}
-                  text={'Learn'}
-                  icon={<LearnSvg />}
+                  onPressButton={() =>
+                    navigation.navigate('DisplayPhrases', {
+                      itemId: item.id,
+                    })
+                  }
                 />
               ))}
           </ScrollView>
@@ -66,6 +73,7 @@ export default function HomeScreenCategoryList() {
     </SafeAreaView>
   );
 }
+
 const styles = StyleSheet.create({
   wrapper: {
     flexDirection: 'row',
