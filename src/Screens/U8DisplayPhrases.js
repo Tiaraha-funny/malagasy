@@ -118,16 +118,13 @@ function LearningScreenDisplayPhrases({route, navigation}) {
         <View>
           {chooseAnswers &&
             chooseAnswers.map(answer => {
-              // const phraseId = answer.phrasesIds[Math.floor(Math.random())];
               return (
                 <TouchableOpacity
                   key={answer.id}
                   style={styles.buttonsWrapper}
-                  onPress={() =>
-                    navigation.navigate('ValidateAnswers', {
-                      // phraseId: phraseId,
-                    })
-                  }>
+                  onPress={() => {
+                    alert('change it');
+                  }}>
                   <ListItems category={isEnglish ? answer.en : answer.mg} />
                   <ActionButton icon={<LearnSvg />} content={'pick'} />
                 </TouchableOpacity>
