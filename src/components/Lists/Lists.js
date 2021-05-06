@@ -13,24 +13,24 @@ import ListItems from '../ListItem/ListItem';
 import datacategoryLists from '../../data/categories.json';
 
 function Lists({text, icon, children, onPressButton}) {
+  const dataLists = datacategoryLists.categories;
   return (
     <ScrollView>
       <SafeAreaView style={styles.container}>
-        {datacategoryLists &&
-          datacategoryLists.categories.map((item, index) => (
-            <TouchableOpacity
-              style={styles.listItem}
-              key={item.id}
-              onPress={onPressButton}>
-              <ListItems category={item.name.en}>
-                <View style={styles.group}>
-                  <Text style={styles.content}>{text}</Text>
-                  {icon}
-                </View>
-                <Text>{children}</Text>
-              </ListItems>
-            </TouchableOpacity>
-          ))}
+        {dataLists.map((item, index) => (
+          <TouchableOpacity
+            style={styles.listItem}
+            key={item.id}
+            onPress={onPressButton}>
+            <ListItems category={item.name.en}>
+              <View style={styles.group}>
+                <Text style={styles.content}>{text}</Text>
+                {icon}
+              </View>
+              <Text>{children}</Text>
+            </ListItems>
+          </TouchableOpacity>
+        ))}
       </SafeAreaView>
     </ScrollView>
   );

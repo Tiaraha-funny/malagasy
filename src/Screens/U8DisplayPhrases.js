@@ -86,6 +86,8 @@ function LearningScreenDisplayPhrases({route, navigation}) {
 
   console.log('answer', chooseAnswers);
 
+  function checkIfCorrect() {}
+
   return (
     <SafeAreaView>
       <View style={styles.wrapper}>
