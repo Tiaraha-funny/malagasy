@@ -12,7 +12,7 @@ import {
 import ListItems from '../ListItem/ListItem';
 import datacategoryLists from '../../data/categories.json';
 
-function Lists({text, icon, children, onPressButton}) {
+function Lists({text, icon, children, onPressButton, itemId}) {
   return (
     <ScrollView>
       <SafeAreaView style={styles.container}>
@@ -22,7 +22,7 @@ function Lists({text, icon, children, onPressButton}) {
               style={styles.listItem}
               key={item.id}
               onPress={onPressButton}>
-              <ListItems category={item.name.en}>
+              <ListItems category={item.name.en} itemId={itemId}>
                 <View style={styles.group}>
                   <Text style={styles.content}>{text}</Text>
                   {icon}

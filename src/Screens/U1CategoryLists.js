@@ -15,6 +15,7 @@ import SwitcherSvg from '../icons/switcher.svg';
 import DatacategoryLists from '../data/categories.json';
 import {userManager} from '../Util/userManager';
 
+//Get the children of the importing files
 function RenderChildren({children}) {
   return <View>{children}</View>;
 }
