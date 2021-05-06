@@ -63,7 +63,6 @@ export default function HomeScreenCategoryList({navigation}) {
                     onPressButton={() =>
                       navigation.navigate('LearnScreen', {
                         itemId: item.id,
-                        phraseId: 'phraseId',
                       })
                     }
                   />
