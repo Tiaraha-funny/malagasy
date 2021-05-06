@@ -5,15 +5,26 @@ import LanguageSwitcherButton from '../components/LanguageSwitcherButton/Switche
 import PhrasesTextarea from '../components/PhrasesTextarea/PhrasesTextarea';
 import SectionHeading from '../components/SectionHeading/SectionHeading';
 
+import Datacategories from '../data/categories.json';
+import PhrasesLists from '../data/phrases.json';
+
 import LearnSvg from '../icons/learn.svg';
 import BackSvg from '../icons/back.svg';
 import ModeSvg from '../icons/mode.svg';
 import SwitcherSvg from '../icons/switcher.svg';
 
 import {userManager} from '../Util/userManager';
+import {useRoute} from '@react-navigation/core';
 
-function ValidateAnswers({navigation}) {
-  const {toggleSwitcher, primary, secondary} = userManager();
+function ValidateAnswers({route, navigation}) {
+  const {toggleSwitcher, primary, secondary, isEnglish} = userManager();
+
+  const {phraseId} = route.params;
+  console.log('route U9', phraseId);
+  // const {param} = useRoute().params ?? {};
+  // const {paramsId} = route?.params;
+  // console.log('params U9(', param);
+
   return (
     <SafeAreaView>
       <View style={styles.wrapper}>
@@ -37,15 +48,15 @@ function ValidateAnswers({navigation}) {
         <View style={styles.title}>
           <SectionHeading text={isEnglish ? 'Category' : 'Sokajy'} />
           <Text>
-            {isEnglish ? categoryTitle.name.en : categoryTitle.name.en}
+            {/* {isEnglish ? categoryTitle.name.en : categoryTitle.name.en} */}
           </Text>
         </View>
         <SectionHeading text={isEnglish ? 'The phrase' : 'Andian-teny'} />
         <View style={styles.phraseStyle}>
           <PhrasesTextarea
-            phrase={
-              !isEnglish ? displayIdPhrase?.name?.en : displayIdPhrase?.name?.mg
-            }
+          // phrase={
+          //   !isEnglish ? displayIdPhrase?.name?.en : displayIdPhrase?.name?.mg
+          // }
           />
         </View>
         <SectionHeading

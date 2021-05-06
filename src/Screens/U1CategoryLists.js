@@ -56,16 +56,24 @@ export default function HomeScreenCategoryList({navigation}) {
           />
           <ScrollView>
             {DatacategoryLists &&
-              DatacategoryLists.categories.map((item, index) => (
-                <Lists
-                  key={item.id}
-                  onPressButton={() =>
-                    navigation.navigate('LearnScreen', {
-                      itemId: item.id,
-                    })
-                  }
-                />
-              ))}
+              DatacategoryLists.categories.map((item, index) => {
+                // const phraseId = item.phrasesIds[Math.floor(Math.random())];
+                // const answerId =
+                //   answer.phrasesIds[
+                //     Math.floor(Math.random() * answer.phrasesIds.length)
+                //   ];
+                return (
+                  <Lists
+                    key={item.id}
+                    onPressButton={() =>
+                      navigation.navigate('LearnScreen', {
+                        itemId: item.id,
+                        phraseId: 'phraseId',
+                      })
+                    }
+                  />
+                );
+              })}
           </ScrollView>
         </RenderChildren>
       </View>
