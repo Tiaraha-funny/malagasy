@@ -9,11 +9,11 @@ export const userManager = () => {
   const [mode, setMode] = useState(true);
   const [categoryList, setCategoryList] = useState([]);
   const [phrases, setPhrases] = useState([]);
+  const [showNextBtn, setShowNextBtn] = useState(false);
 
   const toggleSwitcher = useCallback(() => {
     return setSwitcherLang(!switcherLang), setIsEnglish(!isEnglish);
   });
-
   let primary = 'en';
   let secondary = 'ma';
   if (!switcherLang) {
@@ -23,6 +23,10 @@ export const userManager = () => {
 
   function toggleModeBacground() {
     setMode(!mode);
+  }
+
+  function toggleShowNextButton() {
+    setShowNextBtn(true);
   }
 
   const getCategory = categoryList.categories;
@@ -42,6 +46,8 @@ export const userManager = () => {
     secondary,
     toggleSwitcher,
     toggleModeBacground,
+    toggleShowNextButton,
+    showNextBtn,
     mode,
     isEnglish,
     loading,

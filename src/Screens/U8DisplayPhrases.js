@@ -22,9 +22,17 @@ import ModeSvg from '../icons/mode.svg';
 import SwitcherSvg from '../icons/switcher.svg';
 import ListItems from '../components/ListItem/ListItem';
 import {userManager} from '../Util/userManager';
+import NextButton from '../components/NextButton/NextButton';
 
 function LearningScreenDisplayPhrases({route, navigation}) {
-  const {toggleSwitcher, primary, secondary, isEnglish} = userManager();
+  const {
+    toggleSwitcher,
+    primary,
+    secondary,
+    isEnglish,
+    toggleShowNextButton,
+    showNextBtn,
+  } = userManager();
 
   //To get the id from anywhere
   const paramsId = route.params.itemId;
@@ -123,7 +131,7 @@ function LearningScreenDisplayPhrases({route, navigation}) {
                   key={answer.id}
                   style={styles.buttonsWrapper}
                   onPress={() => {
-                    alert('change it');
+                    toggleShowNextButton();
                   }}>
                   <ListItems category={isEnglish ? answer.en : answer.mg} />
                   <ActionButton icon={<LearnSvg />} content={'pick'} />
@@ -131,6 +139,13 @@ function LearningScreenDisplayPhrases({route, navigation}) {
               );
             })}
         </View>
+        <Text style={styles.nextBtn}>
+          {showNextBtn ? (
+            <NextButton text={'Next'} onPress={() => alert('clicked')} />
+          ) : (
+            ''
+          )}
+        </Text>
       </View>
     </SafeAreaView>
   );
@@ -169,6 +184,14 @@ const styles = StyleSheet.create({
   title: {
     flexDirection: 'row',
     alignItems: 'center',
+  },
+
+  nextBtn: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginHorizontal: 200,
+    marginVertical: 80,
   },
 });
 export default LearningScreenDisplayPhrases;
