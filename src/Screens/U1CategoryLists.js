@@ -57,11 +57,6 @@ export default function HomeScreenCategoryList({navigation}) {
           <ScrollView>
             {DatacategoryLists &&
               DatacategoryLists.categories.map((item, index) => {
-                // const phraseId = item.phrasesIds[Math.floor(Math.random())];
-                // const answerId =
-                //   answer.phrasesIds[
-                //     Math.floor(Math.random() * answer.phrasesIds.length)
-                //   ];
                 return (
                   <Lists
                     key={item.id}
