@@ -30,8 +30,9 @@ function LearningScreenDisplayPhrases({route, navigation}) {
   const {toggleSwitcher, primary, secondary, isEnglish} = userManager();
 
   const [showNextBtn, setShowNextBtn] = useState(false);
-
   const [correctAnswer, setCorrectAnswer] = useState(false);
+  const [currentIcon, setCurrentIcon] = useState(`${(<LearnSvg />)}`);
+  const [currentText, setCurrentText] = useState('Pick');
 
   //To get the id from anywhere
   const paramsId = route.params.itemId;
@@ -56,7 +57,9 @@ function LearningScreenDisplayPhrases({route, navigation}) {
     phrases && phrases.find(phr => phr.id.includes(randomePhrasesIds));
 
   // console.log('random', randomePhrasesIds);
-  const findSamePhraseId = categoryTitle.phrasesIds.find(t => t);
+  const findSamePhraseId = categoryTitle.phrasesIds.find(
+    sameId => sameId === displayIdPhrase.id,
+  );
 
   const matcheTheIds =
     phrases &&
@@ -64,7 +67,6 @@ function LearningScreenDisplayPhrases({route, navigation}) {
 
   const moreOptions =
     matcheTheIds && matcheTheIds.filter(id => id.id !== displayIdPhrase.id);
-  console.log('ma', matcheTheIds);
 
   const randomOne =
     moreOptions && moreOptions[Math.floor(Math.random() * moreOptions.length)];
@@ -86,26 +88,25 @@ function LearningScreenDisplayPhrases({route, navigation}) {
     return 0.5 - Math.random();
   });
 
-  let icons;
-  let text;
-
-  function toggleShowNextButton() {
+  function toggleValidateAnswers() {
     setShowNextBtn(true);
     if (displayIdPhrase.id === findSamePhraseId) {
       setCorrectAnswer(true);
-      text = 'correct';
-      icons = <TickSvg />;
+      setCurrentIcon(`${(<TickSvg />)}`);
+      setCurrentText('correct');
     } else if (displayIdPhrase.id !== findSamePhraseId) {
-      setCorrectAnswer(false);
-      text = 'wrong';
-      icons = <WrongSvg />;
-    } else {
-      text = 'pick';
-      icons = <LearnSvg />;
+      setCorrectAnswer(true);
+      setCurrentText('wrong');
+      setCurrentIcon(`${(<WrongSvg />)}`);
     }
   }
 
-  console.log('correct', correctAnswer);
+  console.log('correct  text', currentText);
+  console.log('correct  icon', currentIcon);
+
+  function toggleNextButton() {
+    return Datacategories;
+  }
 
   return (
     <SafeAreaView>
@@ -149,15 +150,15 @@ function LearningScreenDisplayPhrases({route, navigation}) {
             chooseAnswers.map(answer => {
               return (
                 <TouchableOpacity
-                  key={answer.id}
+                  key={answer.en}
                   style={styles.buttonsWrapper}
                   onPress={() => {
-                    toggleShowNextButton();
+                    toggleValidateAnswers();
                   }}>
                   <ListItems category={isEnglish ? answer.en : answer.mg} />
                   <ActionButton
-                    icon={correctAnswer ? icons : <LearnSvg />}
-                    content={correctAnswer ? text : 'pick'}
+                    icon={correctAnswer ? <TickSvg /> : <LearnSvg />}
+                    content={correctAnswer ? 'correct' : 'pick'}
                   />
                 </TouchableOpacity>
               );
@@ -165,7 +166,7 @@ function LearningScreenDisplayPhrases({route, navigation}) {
         </View>
         <>
           {showNextBtn ? (
-            <NextButton text={'Next'} onPress={() => alert('clicked')} />
+            <NextButton text={'Next'} onPress={toggleNextButton} />
           ) : (
             <Text>{''}</Text>
           )}

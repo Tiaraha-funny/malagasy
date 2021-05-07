@@ -78,7 +78,9 @@ export default function HomeScreenCategoryList({navigation}) {
                     })
                   }
                   style={styles.buttonsWrapper}>
-                  <ListItems category={item.name.en} />
+                  <ListItems
+                    category={isEnglish ? item.name.en : item.name.mg}
+                  />
                   <ActionButton icon={<LearnSvg />} content={'Learn'} />
                 </TouchableOpacity>
               );
