@@ -28,18 +28,20 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     margin: 10,
     height: 40,
-    width: '20%',
+    width: '23%',
     justifyContent: 'center',
   },
 
   containerNonedisabled: {
     backgroundColor: '#06B6D4',
     height: 40,
-    width: '20%',
+    width: '23%',
     borderRadius: 30,
     margin: 10,
     justifyContent: 'center',
-    alignItems: 'flex-end',
+    alignItems: 'center',
+    marginHorizontal: 150,
+    marginVertical: 50,
   },
 
   textDisabled: {
@@ -47,8 +49,6 @@ const styles = StyleSheet.create({
     lineHeight: 19,
     fontSize: 16,
     fontWeight: '600',
-    paddingEnd: 25,
-    paddingStart: 25,
   },
 
   textNonedisabled: {
@@ -56,8 +56,6 @@ const styles = StyleSheet.create({
     lineHeight: 19,
     fontSize: 16,
     fontWeight: '600',
-    paddingEnd: 25,
-    paddingStart: 25,
   },
 
   textWrapper: {

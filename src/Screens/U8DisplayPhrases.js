@@ -16,6 +16,8 @@ import ToolButton from '../components/ToolButton/ToolButton';
 import Datacategories from '../data/categories.json';
 import PhrasesLists from '../data/phrases.json';
 
+import WrongSvg from '../icons/wrong.svg';
+import TickSvg from '../icons/tick.svg';
 import LearnSvg from '../icons/learn.svg';
 import BackSvg from '../icons/back.svg';
 import ModeSvg from '../icons/mode.svg';
@@ -25,14 +27,11 @@ import {userManager} from '../Util/userManager';
 import NextButton from '../components/NextButton/NextButton';
 
 function LearningScreenDisplayPhrases({route, navigation}) {
-  const {
-    toggleSwitcher,
-    primary,
-    secondary,
-    isEnglish,
-    toggleShowNextButton,
-    showNextBtn,
-  } = userManager();
+  const {toggleSwitcher, primary, secondary, isEnglish} = userManager();
+
+  const [showNextBtn, setShowNextBtn] = useState(false);
+
+  const [correctAnswer, setCorrectAnswer] = useState(false);
 
   //To get the id from anywhere
   const paramsId = route.params.itemId;
@@ -56,11 +55,8 @@ function LearningScreenDisplayPhrases({route, navigation}) {
   const displayIdPhrase =
     phrases && phrases.find(phr => phr.id.includes(randomePhrasesIds));
 
-  console.log('random', randomePhrasesIds);
-  console.log('displayIdPhrase', displayIdPhrase.name);
-  console.log('phrase id', getPhraseIds);
-  console.log('params', paramsId);
-  console.log('answer', categoryTitle);
+  // console.log('random', randomePhrasesIds);
+  const findSamePhraseId = categoryTitle.phrasesIds.find(t => t);
 
   const matcheTheIds =
     phrases &&
@@ -68,6 +64,7 @@ function LearningScreenDisplayPhrases({route, navigation}) {
 
   const moreOptions =
     matcheTheIds && matcheTheIds.filter(id => id.id !== displayIdPhrase.id);
+  console.log('ma', matcheTheIds);
 
   const randomOne =
     moreOptions && moreOptions[Math.floor(Math.random() * moreOptions.length)];
@@ -89,7 +86,26 @@ function LearningScreenDisplayPhrases({route, navigation}) {
     return 0.5 - Math.random();
   });
 
-  function checkIfCorrect() {}
+  let icons;
+  let text;
+
+  function toggleShowNextButton() {
+    setShowNextBtn(true);
+    if (displayIdPhrase.id === findSamePhraseId) {
+      setCorrectAnswer(true);
+      text = 'correct';
+      icons = <TickSvg />;
+    } else if (displayIdPhrase.id !== findSamePhraseId) {
+      setCorrectAnswer(false);
+      text = 'wrong';
+      icons = <WrongSvg />;
+    } else {
+      text = 'pick';
+      icons = <LearnSvg />;
+    }
+  }
+
+  console.log('correct', correctAnswer);
 
   return (
     <SafeAreaView>
@@ -112,7 +128,7 @@ function LearningScreenDisplayPhrases({route, navigation}) {
       <View style={styles.group}>
         <View style={styles.title}>
           <SectionHeading text={isEnglish ? 'Category' : 'Sokajy'} />
-          <Text>
+          <Text style={{fontSize: 17}}>
             {isEnglish ? categoryTitle.name.en : categoryTitle.name.en}
           </Text>
         </View>
@@ -139,18 +155,21 @@ function LearningScreenDisplayPhrases({route, navigation}) {
                     toggleShowNextButton();
                   }}>
                   <ListItems category={isEnglish ? answer.en : answer.mg} />
-                  <ActionButton icon={<LearnSvg />} content={'pick'} />
+                  <ActionButton
+                    icon={correctAnswer ? icons : <LearnSvg />}
+                    content={correctAnswer ? text : 'pick'}
+                  />
                 </TouchableOpacity>
               );
             })}
         </View>
-        <Text style={styles.nextBtn}>
+        <>
           {showNextBtn ? (
             <NextButton text={'Next'} onPress={() => alert('clicked')} />
           ) : (
-            ''
+            <Text>{''}</Text>
           )}
-        </Text>
+        </>
       </View>
     </SafeAreaView>
   );
@@ -189,14 +208,6 @@ const styles = StyleSheet.create({
   title: {
     flexDirection: 'row',
     alignItems: 'center',
-  },
-
-  nextBtn: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginHorizontal: 200,
-    marginVertical: 80,
   },
 });
 export default LearningScreenDisplayPhrases;

@@ -67,14 +67,14 @@ export default function HomeScreenCategoryList({navigation}) {
           />
           <ScrollView>
             {dataLists.map(item => {
-              const getAnswerId = item.phrasesIds[Math.floor(Math.random())];
+              // const getAnswerId = item.phrasesIds[Math.floor(Math.random())];
               return (
                 <TouchableOpacity
                   key={item.id}
                   onPress={() =>
                     navigation.navigate('LearnScreen', {
                       itemId: item.id,
-                      phraseId: getAnswerId,
+                      // phraseId: getAnswerId,
                     })
                   }
                   style={styles.buttonsWrapper}>
