@@ -32,8 +32,6 @@ export default function HomeScreenCategoryList({navigation}) {
   const {toggleSwitcher, primary, secondary, isEnglish} = userManager();
 
   const dataLists = DatacategoryLists.categories;
-  // const mapIt = dataLists.map(it => it.name);
-  // console.log('mapit', mapIt);
 
   return (
     <SafeAreaView>

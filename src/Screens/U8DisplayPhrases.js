@@ -47,7 +47,6 @@ function LearningScreenDisplayPhrases({route, navigation}) {
   //Get the phrases from JSON file
 
   const phrases = PhrasesLists.phrases;
-
   //To get the id in the phrase
   const getPhraseIds = categoryTitle && categoryTitle.id;
 
@@ -56,6 +55,12 @@ function LearningScreenDisplayPhrases({route, navigation}) {
 
   const displayIdPhrase =
     phrases && phrases.find(phr => phr.id.includes(randomePhrasesIds));
+
+  console.log('random', randomePhrasesIds);
+  console.log('displayIdPhrase', displayIdPhrase.name);
+  console.log('phrase id', getPhraseIds);
+  console.log('params', paramsId);
+  console.log('answer', categoryTitle);
 
   const matcheTheIds =
     phrases &&
@@ -83,8 +88,6 @@ function LearningScreenDisplayPhrases({route, navigation}) {
   const chooseAnswers = randomeAllOptions.sort(function () {
     return 0.5 - Math.random();
   });
-
-  console.log('answer', chooseAnswers);
 
   function checkIfCorrect() {}
 

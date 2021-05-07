@@ -14,6 +14,7 @@ export const userManager = () => {
   const toggleSwitcher = useCallback(() => {
     return setSwitcherLang(!switcherLang), setIsEnglish(!isEnglish);
   });
+
   let primary = 'en';
   let secondary = 'ma';
   if (!switcherLang) {
@@ -28,8 +29,6 @@ export const userManager = () => {
   function toggleShowNextButton() {
     setShowNextBtn(true);
   }
-
-  const getCategory = categoryList.categories;
 
   useEffect(() => {
     setCategoryList(DatacategoryLists);
@@ -54,6 +53,5 @@ export const userManager = () => {
     categoryList,
     phrases,
     categoryList,
-    getCategory,
   };
 };
