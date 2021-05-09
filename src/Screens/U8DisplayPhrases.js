@@ -33,6 +33,10 @@ function LearningScreenDisplayPhrases({route, navigation}) {
   const [correctAnswer, setCorrectAnswer] = useState(false);
   const [currentIcon, setCurrentIcon] = useState(`${(<LearnSvg />)}`);
   const [currentText, setCurrentText] = useState('Pick');
+  const [isClicked, setIsClicked] = useState(false);
+  const [answers, setAnswers] = useState([]);
+  const [displayPhase, setDisplayPhrase] = useState([]);
+  const [hasClicked, setHasClicked] = useState(false);
 
   //To get the id from anywhere
   const paramsId = route.params.itemId;
@@ -44,26 +48,24 @@ function LearningScreenDisplayPhrases({route, navigation}) {
     Datacategories.categories &&
     Datacategories.categories.find(categoryId => categoryId.id == paramsId);
 
+  //To get the id in the phrase
+  const getPhraseIds = categoryTitle && categoryTitle.phrasesIds;
+
+  console.log(categoryTitle);
+
   //Get the phrases from JSON file
 
   const phrases = PhrasesLists.phrases;
-  //To get the id in the phrase
-  const getPhraseIds = categoryTitle && categoryTitle.id;
 
   const randomePhrasesIds =
     getPhraseIds[Math.floor(Math.random() * getPhraseIds.length)];
 
-  const displayIdPhrase =
-    phrases && phrases.find(phr => phr.id.includes(randomePhrasesIds));
-
-  // console.log('random', randomePhrasesIds);
-  const findSamePhraseId = categoryTitle.phrasesIds.find(
-    sameId => sameId === displayIdPhrase.id,
-  );
-
   const matcheTheIds =
     phrases &&
     phrases.filter(phr => phr.id.includes(randomePhrasesIds.substring(0, 4)));
+
+  const displayIdPhrase =
+    phrases && matcheTheIds.find(phr => phr.id === randomePhrasesIds);
 
   const moreOptions =
     matcheTheIds && matcheTheIds.filter(id => id.id !== displayIdPhrase.id);
@@ -89,24 +91,37 @@ function LearningScreenDisplayPhrases({route, navigation}) {
   });
 
   function toggleValidateAnswers() {
+    setIsClicked(true);
     setShowNextBtn(true);
-    if (displayIdPhrase.id === findSamePhraseId) {
+    if (displayIdPhrase.id === displayPhase.id) {
       setCorrectAnswer(true);
       setCurrentIcon(`${(<TickSvg />)}`);
       setCurrentText('correct');
-    } else if (displayIdPhrase.id !== findSamePhraseId) {
+    } else if (displayIdPhrase.id !== displayPhase.id) {
       setCorrectAnswer(true);
       setCurrentText('wrong');
       setCurrentIcon(`${(<WrongSvg />)}`);
     }
   }
 
-  console.log('correct  text', currentText);
-  console.log('correct  icon', currentIcon);
-
   function toggleNextButton() {
-    return Datacategories;
+    setCorrectAnswer(false);
+    setIsClicked(false);
+    setHasClicked(true);
+    setDisplayPhrase(displayIdPhrase);
+    setAnswers(chooseAnswers);
+    setShowNextBtn(false);
+    if (hasClicked) {
+      setCurrentText('pick');
+      setCurrentIcon(<LearnSvg />);
+    }
   }
+
+  useEffect(() => {
+    setDisplayPhrase(displayIdPhrase);
+    setAnswers(chooseAnswers);
+    toggleNextButton();
+  }, []);
 
   return (
     <SafeAreaView>
@@ -137,7 +152,7 @@ function LearningScreenDisplayPhrases({route, navigation}) {
         <View style={styles.phraseStyle}>
           <PhrasesTextarea
             phrase={
-              !isEnglish ? displayIdPhrase?.name?.en : displayIdPhrase?.name?.mg
+              !isEnglish ? displayPhase?.name?.en : displayPhase?.name?.mg
             }
           />
         </View>
@@ -146,23 +161,26 @@ function LearningScreenDisplayPhrases({route, navigation}) {
         />
 
         <View>
-          {chooseAnswers &&
-            chooseAnswers.map(answer => {
-              return (
-                <TouchableOpacity
-                  key={answer.en}
-                  style={styles.buttonsWrapper}
-                  onPress={() => {
-                    toggleValidateAnswers();
-                  }}>
-                  <ListItems category={isEnglish ? answer.en : answer.mg} />
-                  <ActionButton
-                    icon={correctAnswer ? <TickSvg /> : <LearnSvg />}
-                    content={correctAnswer ? 'correct' : 'pick'}
-                  />
-                </TouchableOpacity>
-              );
-            })}
+          {answers.map(answer => {
+            return (
+              <TouchableOpacity
+                key={answer?.id}
+                style={styles.buttonsWrapper}
+                onPress={() => {
+                  toggleValidateAnswers();
+                }}>
+                <ListItems category={isEnglish ? answer?.en : answer?.mg} />
+                <ActionButton
+                  icon={correctAnswer ? <TickSvg /> : <LearnSvg />}
+                  content={correctAnswer ? 'correct' : 'pick'}
+                  setIsClicked={setIsClicked}
+                  isClicked={isClicked}
+                  displayIdPhrase={displayIdPhrase}
+                  category={answers.en}
+                />
+              </TouchableOpacity>
+            );
+          })}
         </View>
         <>
           {showNextBtn ? (
@@ -211,4 +229,5 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
 });
+
 export default LearningScreenDisplayPhrases;
