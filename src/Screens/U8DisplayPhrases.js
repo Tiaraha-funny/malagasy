@@ -1,4 +1,4 @@
-import React, {useState, useCallback, useEffect} from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   View,
   Text,
@@ -7,15 +7,19 @@ import {
   TouchableOpacity,
   FlatList,
 } from 'react-native';
+
+//Importing all the components needed
 import ActionButton from '../components/ActionButton/ActionButton';
 import LanguageSwitcherButton from '../components/LanguageSwitcherButton/SwitcherButton';
 import PhrasesTextarea from '../components/PhrasesTextarea/PhrasesTextarea';
 import SectionHeading from '../components/SectionHeading/SectionHeading';
 import ToolButton from '../components/ToolButton/ToolButton';
 
+// Importing the json files to get the data
 import Datacategories from '../data/categories.json';
 import PhrasesLists from '../data/phrases.json';
 
+// Importing all the svg needed
 import WrongSvg from '../icons/wrong.svg';
 import TickSvg from '../icons/tick.svg';
 import LearnSvg from '../icons/learn.svg';
@@ -27,8 +31,10 @@ import {userManager} from '../Util/userManager';
 import NextButton from '../components/NextButton/NextButton';
 
 function LearningScreenDisplayPhrases({route, navigation}) {
+  // get the variables needed from manager as context
   const {toggleSwitcher, primary, secondary, isEnglish} = userManager();
 
+  // Handle all the states needed
   const [showNextBtn, setShowNextBtn] = useState(false);
   const [correctAnswer, setCorrectAnswer] = useState(false);
   const [currentIcon, setCurrentIcon] = useState(`${(<LearnSvg />)}`);
@@ -60,9 +66,11 @@ function LearningScreenDisplayPhrases({route, navigation}) {
     phrases &&
     phrases.filter(phr => phr.id.includes(randomePhrasesIds.substr(0, 3)));
 
+  // Display the phrase which is inside the textArea component
   const displayIdPhrase =
     phrases && matcheTheIds.find(phr => phr.id === randomePhrasesIds);
 
+  // Get more option to shuffle from the data
   const moreOptions =
     matcheTheIds && matcheTheIds.filter(id => id.id !== displayIdPhrase.id);
 
@@ -82,10 +90,12 @@ function LearningScreenDisplayPhrases({route, navigation}) {
     randomFourth?.name,
   ];
 
+  // Answers which is randoming and shuffled inside the listItems
   const chooseAnswers = randomeAllOptions.sort(function () {
     return 0.5 - Math.random();
   });
 
+  // Handle the text changes after clicking one of the items in the button
   function toggleValidateAnswers() {
     setIsClicked(true);
     setShowNextBtn(true);
@@ -101,6 +111,7 @@ function LearningScreenDisplayPhrases({route, navigation}) {
     }
   }
 
+  //  To show and to hide the next button and handle the shuffling question after clicking next button
   function toggleNextButton() {
     setCorrectAnswer(false);
     setIsClicked(false);
@@ -167,6 +178,7 @@ function LearningScreenDisplayPhrases({route, navigation}) {
                   toggleValidateAnswers();
                 }}>
                 <ListItems category={isEnglish ? answer?.en : answer?.mg} />
+                {/* Get the action button */}
                 <ActionButton
                   icon={
                     correctAnswer ? (

@@ -1,18 +1,18 @@
-import React, {useCallback, useEffect, useState} from 'react';
+import React from 'react';
 import {
   SafeAreaView,
   ScrollView,
   StyleSheet,
-  Text,
   TouchableOpacity,
   View,
 } from 'react-native';
-import Lists from '../components/Lists/Lists';
+
+// Importing all the components needed
 import ToolButton from '../components/ToolButton/ToolButton';
 import SectionHeading from '../components/SectionHeading/SectionHeading';
 import LanguageSwitcherButton from '../components/LanguageSwitcherButton/SwitcherButton';
 
-import LeftArrowSvg from '../icons/left-arrow.svg';
+// Importing all the Svg needed
 import DoubleTickSvg from '../icons/double-tick.svg';
 import TickSvg from '../icons/tick.svg';
 import ModeSvg from '../icons/mode.svg';
@@ -24,13 +24,16 @@ import {userManager} from '../Util/userManager';
 import ListItems from '../components/ListItem/ListItem';
 import ActionButton from '../components/ActionButton/ActionButton';
 
+//Rendring the children of the ListItems and some othe components
 function RenderChildren({children}) {
   return <View>{children}</View>;
 }
 
 export default function HomeScreenCategoryList({navigation}) {
+  //Get all the variable needed from manager as context
   const {toggleSwitcher, primary, secondary, isEnglish} = userManager();
 
+  //Get the data category from category lists
   const dataLists = DatacategoryLists.categories;
 
   return (
@@ -65,16 +68,16 @@ export default function HomeScreenCategoryList({navigation}) {
           <SectionHeading
             text={isEnglish ? 'Select a category' : 'Fidio ny sokajy'}
           />
+
           <ScrollView>
+            {/* Mapping the data from the category lists */}
             {dataLists.map(item => {
-              // const getAnswerId = item.phrasesIds[Math.floor(Math.random())];
               return (
                 <TouchableOpacity
                   key={item.id}
                   onPress={() =>
                     navigation.navigate('LearnScreen', {
                       itemId: item.id,
-                      // phraseId: getAnswerId,
                     })
                   }
                   style={styles.buttonsWrapper}>
