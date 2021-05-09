@@ -1,9 +1,14 @@
 import React, {useCallback, useEffect, useState} from 'react';
 import {SafeAreaView, ScrollView, StyleSheet, Text, View} from 'react-native';
+
+//importing all the components needed
+
 import Lists from '../components/Lists/Lists';
 import ToolButton from '../components/ToolButton/ToolButton';
 import SectionHeading from '../components/SectionHeading/SectionHeading';
 import LanguageSwitcherButton from '../components/LanguageSwitcherButton/SwitcherButton';
+
+//import all the svg needed
 
 import LeftArrowSvg from '../icons/left-arrow.svg';
 import DoubleTickSvg from '../icons/double-tick.svg';
@@ -21,6 +26,7 @@ function RenderChildren({children}) {
 }
 
 export default function HomeScreenCategoryList({navigation}) {
+  //get variabls from the manages as context
   const {toggleSwitcher, primary, secondary, isEnglish} = userManager();
 
   return (
@@ -56,6 +62,7 @@ export default function HomeScreenCategoryList({navigation}) {
             text={isEnglish ? 'Select a category' : 'Fidio ny sokajy'}
           />
           <ScrollView>
+            {/* Mapping the data from json file */}
             {DatacategoryLists &&
               DatacategoryLists.categories.map((item, index) => (
                 <Lists

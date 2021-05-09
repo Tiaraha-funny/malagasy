@@ -1,10 +1,10 @@
 import * as React from 'react';
+//Importing elements needed
 import {StyleSheet, Text, View, TouchableOpacity} from 'react-native';
 
 export default function LanguageSwitcherButton({
   icon,
   onPress,
-  switcherLang,
   primary,
   secondary,
 }) {

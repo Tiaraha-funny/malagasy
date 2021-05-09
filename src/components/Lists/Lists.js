@@ -13,6 +13,7 @@ import ListItems from '../ListItem/ListItem';
 import datacategoryLists from '../../data/categories.json';
 
 function Lists({text, icon, children, onPressButton, itemId}) {
+  //Having the display of how the lists look like in the home screen
   return (
     <ScrollView>
       <SafeAreaView style={styles.container}>

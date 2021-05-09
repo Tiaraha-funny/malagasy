@@ -37,5 +37,5 @@ storiesOf('ToolButton', module)
   ));
 
 function HandleClickToolButton(toolBtn) {
-  console.log('I clicked', toolBtn);
+  alert('You have clicked the tool button !!');
 }

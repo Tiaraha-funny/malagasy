@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {View} from 'react-native';
 import {storiesOf} from '@storybook/react-native';
-import PhrasesTextarea from "./PhrasesTextarea";
+import PhrasesTextarea from './PhrasesTextarea';
 
 storiesOf('Phrases Textarea', module)
   .addDecorator(story => <View>{story()}</View>)
@@ -18,9 +18,9 @@ storiesOf('Phrases Textarea', module)
     />
   ));
 
-  // ----------Edit function---------------
-  
-  function Edit() {
+// ----------Edit function---------------
+
+function Edit() {
   const [text, setText] = React.useState('');
   return (
     <PhrasesTextarea

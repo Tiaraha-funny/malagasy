@@ -11,6 +11,7 @@ storiesOf('Language Switcher Button', module)
 function HandleSwitcherClick() {
   const [switcherLang, setSwitcherLang] = useState(false);
 
+  //To handle the switching again and again
   function toggleCallBack() {
     setSwitcherLang(!switcherLang);
   }
