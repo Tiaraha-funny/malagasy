@@ -2,6 +2,7 @@ import * as React from 'react';
 import {StyleSheet, View, Text, TouchableOpacity} from 'react-native';
 
 export default function ActionButton({content, icon, onPress}) {
+  //Checking the changes after clicking the buttons and follow its own color
   let textColor = '#06B6D4';
   if (content === 'Right') {
     textColor = '#06D440';
@@ -9,6 +10,7 @@ export default function ActionButton({content, icon, onPress}) {
     textColor = '#D4068E';
   }
 
+  //how the action buttons look like in the detail screen
   return (
     <View style={styles.container}>
       <TouchableOpacity onPress={onPress} style={styles.touchButton}>

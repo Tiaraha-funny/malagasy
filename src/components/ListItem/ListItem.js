@@ -2,6 +2,7 @@ import * as React from 'react';
 import {SafeAreaView, ScrollView, StyleSheet, Text, View} from 'react-native';
 
 export default function ListItems({text, category, children}) {
+  //displaying the items and get the children of the action button
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.wrapper}>

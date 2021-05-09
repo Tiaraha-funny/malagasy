@@ -24,7 +24,7 @@ export const userManager = () => {
   function toggleModeBacground() {
     setMode(!mode);
   }
-
+  // get the category lists from json
   const getCategory = categoryList.categories;
 
   useEffect(() => {

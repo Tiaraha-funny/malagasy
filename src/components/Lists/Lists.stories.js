@@ -7,6 +7,7 @@ import LearnSvg from '../../icons/learn.svg';
 storiesOf('Lists', module).add('list', () => <HandleList />);
 
 function HandleList() {
+  //Hnadling the data category from json file
   const [categoryLists, setcategoryLists] = useState([]);
 
   useEffect(() => {
