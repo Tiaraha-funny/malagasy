@@ -51,10 +51,6 @@ function LearningScreenDisplayPhrases({route, navigation}) {
   //To get the id in the phrase
   const getPhraseIds = categoryTitle && categoryTitle.phrasesIds;
 
-  console.log(categoryTitle);
-
-  //Get the phrases from JSON file
-
   const phrases = PhrasesLists.phrases;
 
   const randomePhrasesIds =
@@ -62,7 +58,7 @@ function LearningScreenDisplayPhrases({route, navigation}) {
 
   const matcheTheIds =
     phrases &&
-    phrases.filter(phr => phr.id.includes(randomePhrasesIds.substring(0, 4)));
+    phrases.filter(phr => phr.id.includes(randomePhrasesIds.substr(0, 3)));
 
   const displayIdPhrase =
     phrases && matcheTheIds.find(phr => phr.id === randomePhrasesIds);
@@ -93,6 +89,7 @@ function LearningScreenDisplayPhrases({route, navigation}) {
   function toggleValidateAnswers() {
     setIsClicked(true);
     setShowNextBtn(true);
+
     if (displayIdPhrase.id === displayPhase.id) {
       setCorrectAnswer(true);
       setCurrentIcon(`${(<TickSvg />)}`);
@@ -171,12 +168,22 @@ function LearningScreenDisplayPhrases({route, navigation}) {
                 }}>
                 <ListItems category={isEnglish ? answer?.en : answer?.mg} />
                 <ActionButton
-                  icon={correctAnswer ? <TickSvg /> : <LearnSvg />}
-                  content={correctAnswer ? 'correct' : 'pick'}
-                  setIsClicked={setIsClicked}
-                  isClicked={isClicked}
-                  displayIdPhrase={displayIdPhrase}
-                  category={answers.en}
+                  icon={
+                    correctAnswer ? (
+                      <TickSvg />
+                    ) : <LearnSvg /> && correctAnswer ? (
+                      <WrongSvg />
+                    ) : (
+                      <LearnSvg />
+                    )
+                  }
+                  content={
+                    correctAnswer
+                      ? 'correct'
+                      : 'pick' && correctAnswer
+                      ? 'wrong'
+                      : 'pick'
+                  }
                 />
               </TouchableOpacity>
             );
