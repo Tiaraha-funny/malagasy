@@ -9,16 +9,16 @@ storiesOf('Language Switcher Button', module)
   .add('switch', () => <HandleSwitcherClick />);
 
 function HandleSwitcherClick() {
-  const [switcherLang, setSwitcherLang] = useState(false);
+  const [switcherLang, setSwitcherLang] = useState(false); //The import for thst seems to be missing
 
   //To handle the switching again and again
   function toggleCallBack() {
     setSwitcherLang(!switcherLang);
   }
 
-  React.useEffect(() => {
+  React.useEffect(() => { //Why is this needed?
     toggleCallBack();
-  }, []);
+  }, []); 
 
   let primary = 'en';
   let secondary = 'ma';

@@ -36,7 +36,7 @@ export default function HomeScreenCategoryList({navigation}) {
           icon={<PlusSvg />}
           onPress={() =>
             alert(
-              'Hi!!, Please, you have to click one of the list to get an id!!',
+              'Hi!!, Please, you have to click one of the list to get an id!!', // That is not proper english and not formal enough for an app, use something like: "Feature not yet implemented" or "Please select a list item"
             )
           }
         />
@@ -48,12 +48,12 @@ export default function HomeScreenCategoryList({navigation}) {
           secondary={secondary}
         />
 
-        <ToolButton icon={<TickSvg />} onPress={() => alert('I am clicked')} />
+        <ToolButton icon={<TickSvg />} onPress={() => alert('I was clicked')} />
         <ToolButton
           icon={<DoubleTickSvg />}
-          onPress={() => alert('I am clicked')}
+          onPress={() => alert('I was clicked')}
         />
-        <ToolButton icon={<ModeSvg />} onPress={() => alert('I am clicked')} />
+        <ToolButton icon={<ModeSvg />} onPress={() => alert('I was clicked')} />
       </View>
 
       <View style={styles.listcategoryWrapper}>

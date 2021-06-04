@@ -31,7 +31,7 @@ const styles = StyleSheet.create({
     width: '20%',
     justifyContent: 'center',
   },
-
+// Use consistent casing (containerNoneDisabled, but containerEnabled would be better), prevent duplication of style objects 
   containerNonedisabled: {
     backgroundColor: '#06B6D4',
     height: 40,

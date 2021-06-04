@@ -8,8 +8,9 @@ import {
   ScrollView,
   TouchableOpacity,
 } from 'react-native';
-
+// This import should be singular => ListItem
 import ListItems from '../ListItem/ListItem';
+// It should get the data as a prop to be more versatile
 import datacategoryLists from '../../data/categories.json';
 
 function Lists({text, icon, children, onPressButton, itemId}) {

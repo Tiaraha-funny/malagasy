@@ -1,8 +1,8 @@
 import {useCallback, useEffect, useState} from 'react';
 import DatacategoryLists from '../data/categories.json';
 import PhrasesLists from '../data/phrases.json';
-
-export const userManager = () => {
+// I like you planning ahead, but we don't want to have useless code in the codebase. Only add stuff here when necessary/actually used
+export const userManager = () => {// rename it to useSomeWordHere as the warnings in the following lines say.
   const [switcherLang, setSwitcherLang] = useState(false);
   const [loading, setLoading] = useState(true);
   const [isEnglish, setIsEnglish] = useState(false);
@@ -33,7 +33,7 @@ export const userManager = () => {
     setLoading(false);
   }, []);
 
-  useEffect(() => {
+  useEffect(() => { // why?
     toggleSwitcher();
   }, []);
 

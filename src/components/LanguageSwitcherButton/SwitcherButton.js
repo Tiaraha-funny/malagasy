@@ -6,7 +6,7 @@ export default function LanguageSwitcherButton({
   icon,
   onPress,
   primary,
-  secondary,
+  secondary, // Nice use of primary and secondary!
 }) {
   return (
     <View style={styles.container}>

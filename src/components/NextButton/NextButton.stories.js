@@ -25,6 +25,6 @@ storiesOf('Next Button', module)
     <NextButton onPress={() => HandleClick()} text="Add" disabled={true} />
   ));
 
-function HandleClick(content) {
+function HandleClick(content) { // No unused parameters
   alert('You have clicked the next button!!');
 }

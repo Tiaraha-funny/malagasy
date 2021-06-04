@@ -2,6 +2,7 @@ import * as React from 'react';
 import {SafeAreaView, ScrollView, StyleSheet, Text, View} from 'react-native';
 
 export default function ListItems({text, category, children}) {
+  // I would prefer this function to call the action button instead of getting it passed as a child, it should use onPress
   //displaying the items and get the children of the action button
   return (
     <SafeAreaView style={styles.container}>

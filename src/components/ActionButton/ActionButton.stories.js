@@ -3,12 +3,12 @@ import {View} from 'react-native';
 import {storiesOf} from '@storybook/react-native';
 import ActionButton from './ActionButton';
 
-//Importing all the svg needed
+//Importing all the svg needed => That is easy enough to understand that no explanatory comments are needed. They are only necessary when you think somebody would have real struggle understanding it otherwise
 import PickSvg from './icons/pick.svg';
 import WrongSvg from './icons/wrong.svg';
 import RightSvg from './icons/right.svg';
 
-//Adding the function to the story
+//Adding the function to the story  
 storiesOf('Action Button', module)
   .addDecorator(story => <View>{story()}</View>)
   .add('Action Buttons', () => {

@@ -31,7 +31,7 @@ function LearningScreenDisplayPhrases({route, navigation}) {
 
   //For the category title
   const categoryTitle =
-    Datacategories &&
+    Datacategories && // We don't need all these checks, if the data was really not there it is ok for the app to crash
     Datacategories.categories &&
     Datacategories.categories.find(categoryId => categoryId.id === paramsId);
 
@@ -41,18 +41,18 @@ function LearningScreenDisplayPhrases({route, navigation}) {
   //To get the id in the phrase
   const getPhraseIds = categoryTitle && categoryTitle.phrasesIds;
 
-  const randomePhrasesIds =
+  const randomPhrasesIds =
     getPhraseIds[Math.floor(Math.random() * getPhraseIds.length)];
 
   const displayIdPhrase =
-    phrases && phrases.find(phr => phr.id.includes(randomePhrasesIds));
+    phrases && phrases.find(phr => phr.id.includes(randomPhrasesIds));
 
-  const matcheTheIds =
+  const matchTheIds = // Is this not already done with the function above?
     phrases &&
-    phrases.filter(phr => phr.id.includes(randomePhrasesIds.substring(0, 4)));
+    phrases.filter(phr => phr.id.includes(randomPhrasesIds.substring(0, 4)));
 
   const moreOptions =
-    matcheTheIds && matcheTheIds.filter(id => id.id !== displayIdPhrase.id);
+    matchTheIds && matchTheIds.filter(id => id.id !== displayIdPhrase.id);
 
   const randomOne =
     moreOptions && moreOptions[Math.floor(Math.random() * moreOptions.length)];
@@ -63,14 +63,14 @@ function LearningScreenDisplayPhrases({route, navigation}) {
   const randomFourth =
     moreOptions && moreOptions[Math.floor(Math.random() * moreOptions.length)];
 
-  const randomeAllOptions = [
+  const randomAllOptions = [
     randomOne?.name,
     randomTwo?.name,
     randomThree?.name,
     randomFourth?.name,
   ];
 
-  const chooseAnswers = randomeAllOptions.sort(function () {
+  const chooseAnswers = randomAllOptions.sort(function () {
     return 0.5 - Math.random();
   });
 

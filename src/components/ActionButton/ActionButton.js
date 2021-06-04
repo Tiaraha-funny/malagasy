@@ -16,7 +16,7 @@ export default function ActionButton({content, icon, onPress}) {
       <TouchableOpacity onPress={onPress} style={styles.touchButton}>
         <View style={styles.wrapper}>
           <Text
-            style={{
+            style={{ // Try to only use inline styles for the color, why are there pngs in this folder?
               fontWeight: '600',
               fontSize: 16,
               color: textColor,
@@ -39,7 +39,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
 
-  touchButton: {
+  touchButton: { // Remove unused code
     // backgroundColor: '#FFFFFF',
     // borderColor: '#E5E5E5',
     // borderWidth: 1,

@@ -2,7 +2,7 @@ import * as React from 'react';
 import {View} from 'react-native';
 import {storiesOf} from '@storybook/react-native';
 import ToolButton from './ToolButton';
-
+// if you use a dedicated icons folder here, you should do the same in Action button. Choose one and stick with it
 import LeftArrowSvg from '../../icons/left-arrow.svg';
 import DoubleTickSvg from '../../icons/double-tick.svg';
 import TickSvg from '../../icons/tick.svg';
